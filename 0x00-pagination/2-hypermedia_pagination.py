@@ -50,16 +50,20 @@ class Server:
         self.assert_positive_integer_type(page)
         self.assert_positive_integer_type(page_size)
         dataset = self.dataset()
-        start, end = index_range(page, page_size)
+        start_index, end_index = index_range(page, page_size)
         try:
-            data = dataset[start:end]
+            """
+            Returns the slice of the dataset
+            corresponding to the calculated indexes.
+            """
+            data = dataset[start_index:end_index]
         except IndexError:
             data = []
         return data
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """
-        Returns a page of the dataset.
+        Returns a complete info of page of the retrieved dataset.
         Args:
             page (int): The page number.
             page_size (int): The page size.
