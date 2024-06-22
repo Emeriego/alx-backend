@@ -3,8 +3,8 @@
 Contains class with methods to create simple pagination from csv data
 """
 import csv
-from typing import List
 import math
+from typing import List
 index_range = __import__('0-simple_helper_function').index_range
 
 
@@ -76,11 +76,12 @@ class Server:
         dataset = self.dataset()
         total_pages = math.ceil(len(dataset) / page_size)
         data = self.get_page(page, page_size)
-        return {
+        info = {
             "page": page,
             "page_size": len(data),
             "total_pages": total_pages,
             "data": data,
             "prev_page": page - 1 if page > 1 else None,
             "next_page": page + 1 if page < total_pages else None
-            }
+        }
+        return info
