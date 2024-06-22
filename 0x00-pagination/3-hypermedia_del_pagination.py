@@ -9,7 +9,7 @@ from typing import List, Dict
 
 
 class Server:
-    """Server class to paginate a database of popular baby names.
+    """Defines class to paginate a database of popular baby names.
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -43,10 +43,10 @@ class Server:
         """
         Takes 2 integer arguments and returns a dictionary with
         the following key-value pairs:
-            index: index of the first item in the current page
-            next_index: index of the first item in the next page
+            index: the current start index of the return page
+            next_index: the next index to query with
             page_size: the current page size
-            data: actual page of the dataset
+            data: the data on the current page
         Args:
             index(int): first required index
             page_size(int): required number of records per page
