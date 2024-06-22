@@ -9,14 +9,14 @@ from typing import List, Tuple
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
-    Takes 2 integer arguments and returns a tuple of size two
-    containing the start and end index corresponding to the range of
-    indexes to return in a list for those pagination parameters
+    Calculate start and end indexes for pagination.
+
     Args:
-        page (int): page number to return (pages are 1-indexed)
-        page_size (int): number of items per page
-    Return:
-        tuple(start_index, end_index)
+        page (int): The current page number (1-indexed).
+        page_size (int): The number of items per page.
+
+    Returns:
+        Tuple[int, int]: A tuple containing the start index and end index.
     """
     start_index = (page - 1) * page_size
     end_index = start_index + page_size
