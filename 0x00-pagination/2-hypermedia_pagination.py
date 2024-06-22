@@ -63,21 +63,23 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """
-        Returns a complete info of page of the retrieved dataset.
+        Returns pagination info and the data for a specific page.
         Args:
             page (int): The page number.
-            page_size (int): The page size.
+            page_size (int): The number of items per page.
         Returns:
-            List[List]: The page of the dataset.
+            dict: Pagination information and the page data.
         """
-        total_pages = len(self.dataset()) // page_size + 1
+        self.assert_positive_integer_type(page)
+        self.assert_positive_integer_type(page_size)
+        dataset = self.dataset()
+        total_pages = math.ceil(len(dataset) / page_size)
         data = self.get_page(page, page_size)
-        info = {
+        return {
             "page": page,
-            "page_size": page_size if page_size <= len(data) else len(data),
+            "page_size": len(data),
             "total_pages": total_pages,
             "data": data,
             "prev_page": page - 1 if page > 1 else None,
-            "next_page": page + 1 if page + 1 <= total_pages else None
-        }
-        return info
+            "next_page": page + 1 if page < total_pages else None
+            }
