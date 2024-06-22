@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-defines index_range helper function for pagination purpose
+Defines index_range helper function for pagination purpose
 """
 from typing import Tuple
 
@@ -15,13 +15,9 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
     Return:
         tuple(start_index, end_index)
     """
-    start, end = 0, 0
-    for i in range(page):
-        start = end
-        end += page_size
-
-    return (start, end)
-
+    start_index = (page) * page_size
+    end_index = start_index + page_size
+    return (start_index, end_index)
 
 
    
