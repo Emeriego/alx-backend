@@ -6,7 +6,7 @@ from base_caching import BaseCaching
 
 class LFUCache(BaseCaching):
     """
-    FIFOCache defines a FIFO caching system
+    LFUCache defines a LFU caching system
     """
 
     def __init__(self):
@@ -26,24 +26,29 @@ class LFUCache(BaseCaching):
         else:
             length = len(self.cache_data)
             if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                """get the smallest value in the frequency
+                and add them to the list lfu_keys if they are more than one
+                """
                 lfu = min(self.frequency.values())
                 lfu_keys = []
                 for k, v in self.frequency.items():
                     if v == lfu:
                         lfu_keys.append(k)
                 if len(lfu_keys) > 1:
+                    # if the least frequently used is more than one we apply
+                    # least recently used to break the tie
                     lru_lfu = {}
                     for k in lfu_keys:
                         lru_lfu[k] = self.usage.index(k)
-                    discard = min(lru_lfu.values())
-                    discard = self.usage[discard]
+                    least_recently_used = min(lru_lfu.values())
+                    least_recently_freguently_used = self.usage[least_recently_used]
                 else:
-                    discard = lfu_keys[0]
+                    least_recently_freguently_used = lfu_keys[0]
 
-                print("DISCARD: {}".format(discard))
-                del self.cache_data[discard]
-                del self.usage[self.usage.index(discard)]
-                del self.frequency[discard]
+                print("DISCARD: {}".format(least_recently_freguently_used))
+                del self.cache_data[least_recently_freguently_used]
+                del self.usage[self.usage.index(least_recently_freguently_used)]
+                del self.frequency[least_recently_freguently_used]
             # update usage frequency
             if key in self.frequency:
                 self.frequency[key] += 1

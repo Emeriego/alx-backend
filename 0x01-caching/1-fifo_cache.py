@@ -16,6 +16,19 @@ class FIFOCache(BaseCaching):
         super().__init__()
         self.order = []
 
+    # def put(self, key, item):
+    #     """ Check if cache is full.
+    #     # Find the first item added to the cache (FIFO)
+    #     # Remove the oldest item
+    #     # Add new item to cache
+    #     """
+    #     if len(self.cache_data) >= self.MAX_ITEMS:
+    #         first_key = next(iter(self.cache_data))
+    #         print(f"DISCARD: {first_key}\n")
+    #         del self.cache_data[first_key]
+        
+    #     self.cache_data[key] = item
+
     def put(self, key, item):
         """
         Cache a key-value pair
@@ -35,6 +48,6 @@ class FIFOCache(BaseCaching):
         """
         Return the value linked to a given key, or None
         """
-        if key is not None and key in self.cache_data.keys():
-            return self.cache_data[key]
-        return None
+        if key is None and key not in self.cache_data.keys():
+            return None
+        return self.cache_data[key]

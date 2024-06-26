@@ -3,7 +3,6 @@
 """
 from base_caching import BaseCaching
 
-
 class LRUCache(BaseCaching):
     """
     FIFOCache defines a FIFO caching system
