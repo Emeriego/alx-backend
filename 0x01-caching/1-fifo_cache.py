@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """ BaseCaching module
+    implements Fifo caching system
 """
 from base_caching import BaseCaching
 
@@ -18,7 +19,8 @@ class FIFOCache(BaseCaching):
 
     def put(self, key, item):
         """
-        Cache a key-value pair
+        Cache a key-value pair.
+        Mkes use of the order list to ascertain order
         """
         if key is None or item is None:
             return
