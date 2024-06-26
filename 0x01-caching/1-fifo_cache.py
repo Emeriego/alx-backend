@@ -6,21 +6,18 @@ from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """
-    FIFOCache defines a FIFO caching system
+    """FIFOCache defines a FIFO caching system
     """
 
     def __init__(self):
-        """
-        Initialize the class with the parent's init method
+        """Initialize the class with the parent's init method
         """
         super().__init__()
         self.order = []
 
     def put(self, key, item):
-        """
-        Cache a key-value pair.
-        Mkes use of the order list to ascertain order
+        """Cache a key-value pair.
+            Mkes use of the order list to ascertain order
         """
         if key is None or item is None:
             return
@@ -34,8 +31,7 @@ class FIFOCache(BaseCaching):
             self.cache_data[key] = item
 
     def get(self, key):
-        """
-        Return the value linked to a given key, or None
+        """Return the value linked to a given key, or None
         """
         if key is None and key not in self.cache_data.keys():
             return None
